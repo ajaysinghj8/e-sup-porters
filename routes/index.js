@@ -1,19 +1,16 @@
 exports.pm = require('./pm');
 exports.user = require('./user');
 exports.Home = function(req, res){
-  req.db.Pm.find({},function(err,docs) {
+  req.db.Pm.find({},function(err,pms) {
   	if(err) res.json(200,{msg:"no pm found"});
   	else
   	{
-  	 /* docs.forEach(function(doc)
-  		{
-           req.db.User.count(function (err,count) {
-             console.log('VoteCount for : ' + doc._id + " no:"+doc.Votes);
-           });
-           
-  		});
-      */
-  		res.render('index',{Pms:docs});
+  	   req.db.User.find({},function   ( err,users) {
+         if(err) res.json(200,{msg:"no pm found"});
+         else
+                res.render('index',{Pms:pms,Users:users});      
+       });
+  	
   	}
   });
 };

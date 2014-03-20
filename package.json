@@ -11,7 +11,8 @@
     "hjs": "*",
     "mongodb": "*",
     "mongoose": "",
-    "oauth": "*"
+    "oauth": "*",
+    "socket.io": "0.9.13"
     
   }
 }

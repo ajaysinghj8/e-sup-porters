@@ -2,11 +2,32 @@
 <html>
   <head>
     <title>Voters</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+   <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <script type="text/javascript" 
     src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> 
-    
+   <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+   <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+   <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+   <link rel="stylesheet" href="/resources/demos/style.css">
+ 
 <script type="text/javascript">
+$(document).ready(function() {
+  $('#circle_bounce').hover(function() {
+      $( "#circle_bounce" ).toggle( "bounce", { times: 1 }, "slow" );
+  });
+});
+  $(function() {
+    $( document ).tooltip();
+  });
+
+  var center = function () {
+    this.css("position","absolute");
+    this.css("top", Math.max(0, (($(window).height() - $(this).outerHeight()) / 2) + 
+                                                $(window).scrollTop()) + "px");
+    this.css("left", Math.max(0, (($(window).width() - $(this).outerWidth()) / 2) + 
+                                                $(window).scrollLeft()) + "px");
+    return this;
+   }
    function voteme(param) { 
             var objmsg = document.getElementById("votes"+param);
               $.post("/vote/"+param,function (data) {
@@ -22,16 +43,17 @@
  function loginsucessfull(data){
     alert(JSON.stringify(data))
  }
+ $('.container_pms').center();
  </script>
   </head>
     <body>
     <div class="main-div">
-
+     <div class="container_pms">
    <% Pms.forEach(function(g) { %> 
-       <div class="first" onclick="voteme('<%=g._id%>')"><%=g.Name%> <span id="votes<%=g._id%>"><%=g.Votes%></span>  </div>
+       <!--<div class="list_pms" onclick="voteme('<%=g._id%>')"><%=g.Name%> <span id="votes<%=g._id%>"><%=g.Votes%></span>  </div>--> 
   <% }); %>
-        
-
+        </div>
+        <div id="fb-root"></div>
         <script type="text/javascript" src="JS/fb.js"></script>
         <script src="http://connect.facebook.net/en_US/all.js" type="text/javascript"></script>
 
@@ -97,7 +119,33 @@
                 }, { scope: 'email' });
             }
         </script>
-         <div id="btnfblogin" class="btn-facebook" onclick="login()">Sign In with Facebook</div>
-     </div>  
-    </body>
+         <!--<div id="btnfblogin" class="btn-facebook" onclick="login()">Sign In with Facebook</div> -->
+         <div class="containerImages">
+             <ul>
+              <%Users.forEach(function(user) {%>
+             <li><img title='<%=user.DisplayName%>' src="<%=user.ProfilePic+"?type=large"%>"></li>
+              <%});%>
+             </ul>
+        
+         </div>
+         <div id="circle_bounce" class="circle" title="Please Vote me."></div>
+    
+    <script src="http://esupporters.herokuapp.com/socket.io/socket.io.js"></script>
+     <script>
+      var socket = io.connect('http://esupporters.herokuapp.com');
+      socket.on('time', function (data) {
+        $('.server_time').html(data.date);
+       // socket.emit('my other event', { my: 'data' });
+          $('.names').html(data.User.DisplayName);
+          $('.sockimg').attr('src',data.User.ProfilePic+"?type=large");
+
+        });
+      
+      </script>
+     <div class="server_time">time</div>
+     <div class="names">names</div>
+     <img class="sockimg" src=""/>
+   
+   </div>  
+</body>
 </html>

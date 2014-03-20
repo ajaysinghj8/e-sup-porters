@@ -9,7 +9,7 @@ var path = require('path');
 var oauth = require('oauth');
 var mongoose = require('mongoose');
 var querystring= require('querystring');
-
+var socketio = require('socket.io');
 var routes = require('./routes');
 var user = require('./routes/user');
 var config = require('./config');
@@ -23,6 +23,7 @@ app.locals({
 // all environments
 app.configure( function() {
 		app.set('port', process.env.PORT || 3000);
+    app.use(express.static(path.join(__dirname, 'public')));
 		app.set('views', path.join(__dirname, 'views'));
 		app.set('view engine', 'ejs');
 		app.use(express.favicon());
@@ -81,10 +82,33 @@ app.post('/vote/:id',db,routes.user.checkUser,routes.pm.VoteUp,routes.pm.countVo
 //app.post('/admin/pm/add',db,routes.pm.Add);
 
 app.get('*',routes.Page404);
+ 
 
 
 //server
-
-http.createServer(app).listen(app.get('port'), function(){
+var server = http.createServer(app);
+var io = socketio.listen(server);
+server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
+});
+
+//sockets
+io.sockets.on('connection', function (socket) {
+  setInterval(function () {
+    models.User.findOne({},'DisplayName ProfilePic',{ sort:{Updated_at :-1 }},function (err,user) {
+      models.Pm.find({},'Votes',function  (err,pms) {
+        var d = {
+         date : new Date(),
+         User : user,
+         Pm : pms
+        };
+        socket.emit('time',  d ); 
+      
+      });
+     });
+  },10000);
+ /* socket.on('my other event', function (data) {
+    console.log(data);
+  });
+ */
 });
