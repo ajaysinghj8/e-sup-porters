@@ -7,19 +7,21 @@
     src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> 
     
 <script type="text/javascript">
-   
-   function voteme(param) {
+   function voteme(param) { 
             var objmsg = document.getElementById("votes"+param);
               $.post("/vote/"+param,function (data) {
-                   if(data.msg == 'no_session')
-                        login();
-                   else
-                    alert(data); 
+                    if (data.notice !='undefined')
+                        alert(data.msg);
+                    else if (data.notice !='undefined')
+                        alert(data.notice);
+                    else
+                         alert(data.err);
+
                });
    }
- 
-
-
+ function loginsucessfull(data){
+    alert(JSON.stringify(data))
+ }
  </script>
   </head>
     <body>
@@ -38,7 +40,7 @@
             // Init the SDK upon load
             window.fbAsyncInit = function () {
                 FB.init({
-                    appId: '225481757617266', // App ID  214812398681584 final app id 421695167935164
+                    appId: '564097210354318', // App ID 225481757617266 final app id  564097210354318
                     channelUrl: '//' + window.location.hostname + '/channel', // Path to your Channel File
                     status: true, // check login status
                     cookie: true, // enable cookies to allow the server to access the session
@@ -69,15 +71,9 @@
                             //alert(Object.keys(response));
 
                             var picture = "http://graph.facebook.com/" + response.id + "/picture";
-                            var name = "";
-                            var email = "";
-                            var social = "yes";
-
-                            var socialtype = "FACEBOOK";
-                            name = response.name;
-                            email = response.email;
-                            // alert(email);
-                            // username = response.username 
+                            var name = response.name;;
+                            var email = response.email;
+                             
                             if (email == undefined) {
                                 alert("Please allow access to email.");
                                 FB.logout(function () {
@@ -89,7 +85,7 @@
                                    var parameter_data = JSON.parse('{"name": "'+name+'", "email": "'+email+'", "picture": "'+picture+'" }');
 
                                    $.post('/register',parameter_data,function (d) {
-                                                                            alert(JSON.stringify(d));
+                                                                        loginsucessfull(d);
                                    });
                                   
                             }
@@ -101,6 +97,7 @@
                 }, { scope: 'email' });
             }
         </script>
+         <div id="btnfblogin" class="btn-facebook" onclick="login()">Sign In with Facebook</div>
      </div>  
     </body>
 </html>

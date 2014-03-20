@@ -66,7 +66,7 @@ function db (req, res, next) {
 app.get('/',db,routes.Home);
 //app.get('/comment/:id',routes);
 //app.post('/comment/:id',routes.pm.commnet);
-app.post('/register',db,routes.user.register);
+app.post('/register',db,routes.user.register2);
 app.post('/logout',routes.user.logout);
 app.post('/vote/:id',db,routes.user.checkUser,routes.pm.VoteUp,routes.pm.countVotes);
 
@@ -77,8 +77,8 @@ app.post('/vote/:id',db,routes.user.checkUser,routes.pm.VoteUp,routes.pm.countVo
 //app.get('api/getnewusers');
 
 //admin
-app.get('/admin/pm/new',db,routes.pm.New);
-app.post('/admin/pm/add',db,routes.pm.Add);
+//app.get('/admin/pm/new',db,routes.pm.New);
+//app.post('/admin/pm/add',db,routes.pm.Add);
 
 app.get('*',routes.Page404);
 

@@ -24,8 +24,8 @@ exports.countVotes = function  (req,res,next) {
                                   ,{ new: true }
                                   ,function (err,doc) {
     // body...
-                if(err) console.log(err);
-               else res.json(200,{Votes:doc.Votes}) 
+                if(err) {console.log(err);res.json({err:"Sorry! But Something weird had happened."});} 
+               else res.json({notice:"Thanks for your valueable time."}); 
       });
 
   });
@@ -33,30 +33,16 @@ exports.countVotes = function  (req,res,next) {
 };
 
 exports.VoteUp = function(req,res,next) {
-    /*req.db.User.findByIdAndUpdate(req.params.id,{ 
-                                       displayName: b.name
-                                      ,  regno : b.regno                    
-                                      ,  email: b.email                                      
-                                      ,  image: b.image
-                                      ,  updated: new Date()
-                                       
-},{new : true},   function   (err,doc) {
-       if(err) res.send("error updating user"+err);
-       else res.send("user Updated" + doc);
-    });
- };*/
- 
-
   req.db.User.findByIdAndUpdate(req.session.User._id,
                            { My_Pm : req.params.id
                             ,Updated_at: new Date()
                            }
                           ,{ new: true },function (err,doc) {
     // body...
-    if(err) console.log(err);
+    if(err) {console.log(err);res.json({err:"Sorry! But Something weird had happened."});}
     else 
       {  
-        console.log(doc+ " " + req.params.id +" "+req.session.User._id  );
+        console.log('Voted by :' + doc.DisplayName+' -to-'+req.params.id );
         next();
       }
   });		
