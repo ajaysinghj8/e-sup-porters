@@ -130,9 +130,7 @@ $(document).ready(function() {
        // socket.emit('my other event', { my: 'data' });
         //  $('.names').html(data.User.DisplayName);
          // $('.sockimg').attr('src',data.User.ProfilePic+"?type=large");
-           var ul =document.getElementById('new_ul');
-          var li = "<li><img title="+data.User.DisplayName+" src="+data.User.ProfilePic+?type=large+"></li>";
-          ul.prepend(li);
+          $('#new_ul').prepend("<li><img title="+data.User.DisplayName+" src="+data.User.ProfilePic+?type=large+"></li>");
         });
       
       </script>
