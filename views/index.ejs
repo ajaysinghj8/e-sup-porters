@@ -19,15 +19,7 @@ $(document).ready(function() {
   $(function() {
     $( document ).tooltip();
   });
-
-  var center = function () {
-    this.css("position","absolute");
-    this.css("top", Math.max(0, (($(window).height() - $(this).outerHeight()) / 2) + 
-                                                $(window).scrollTop()) + "px");
-    this.css("left", Math.max(0, (($(window).width() - $(this).outerWidth()) / 2) + 
-                                                $(window).scrollLeft()) + "px");
-    return this;
-   }
+ 
    function voteme(param) { 
             var objmsg = document.getElementById("votes"+param);
               $.post("/vote/"+param,function (data) {
@@ -48,11 +40,6 @@ $(document).ready(function() {
   </head>
     <body>
     <div class="main-div">
-     <div class="container_pms">
-   <% Pms.forEach(function(g) { %> 
-       <!--<div class="list_pms" onclick="voteme('<%=g._id%>')"><%=g.Name%> <span id="votes<%=g._id%>"><%=g.Votes%></span>  </div>--> 
-  <% }); %>
-        </div>
         <div id="fb-root"></div>
         <script type="text/javascript" src="JS/fb.js"></script>
         <script src="http://connect.facebook.net/en_US/all.js" type="text/javascript"></script>
@@ -121,7 +108,7 @@ $(document).ready(function() {
         </script>
          <!--<div id="btnfblogin" class="btn-facebook" onclick="login()">Sign In with Facebook</div> -->
          <div class="containerImages">
-             <ul>
+             <ul id="new_ul">
               <%Users.forEach(function(user) {%>
              <li><img title='<%=user.DisplayName%>' src="<%=user.ProfilePic+"?type=large"%>"></li>
               <%});%>
@@ -129,7 +116,12 @@ $(document).ready(function() {
         
          </div>
          <div id="circle_bounce" class="circle" title="Please Vote me."></div>
-    
+              <div class="container_pms">
+   <% Pms.forEach(function(g) { %> 
+       <div class="list_pms" onclick="voteme('<%=g._id%>')"><%=g.Name%> <span id="votes<%=g._id%>"><%=g.Votes%></span>  </div> 
+  <% }); %>
+        </div>
+ 
     <script src="http://esupporters.herokuapp.com/socket.io/socket.io.js"></script>
      <script>
       var socket = io.connect('http://esupporters.herokuapp.com');
@@ -138,7 +130,9 @@ $(document).ready(function() {
        // socket.emit('my other event', { my: 'data' });
           $('.names').html(data.User.DisplayName);
           $('.sockimg').attr('src',data.User.ProfilePic+"?type=large");
-
+        // var ul =document.getElementById('new_ul');
+         //var li = 
+         //ul.prepend();
         });
       
       </script>
