@@ -129,7 +129,7 @@ $(document).ready(function() {
       socket.on('time', function (data) {
         $('.server_time').html(data.date);
        // socket.emit('my other event', { my: 'data' });
-         $('.data').html(JSON.stringify(data.User));
+         $('.data').html(JSON.stringify(data.User.DisplayName));
           var name = data.User.DisplayName;
           var image = data.User.ProfilePic+"?type=large";
          $('#new_ul').prepend("<li><img title="+name+" src="+image+"></li>");
