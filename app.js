@@ -105,7 +105,7 @@ io.sockets.on('connection', function (socket) {
         socket.emit('time',  d );       
       });
      });
-  },4000);
+  },10000);
  /* socket.on('my other event', function (data) {
     console.log(data);
   });
