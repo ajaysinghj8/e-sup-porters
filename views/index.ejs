@@ -131,7 +131,7 @@ $(document).ready(function() {
        // socket.emit('my other event', { my: 'data' });
           var name = data.User.DisplayName;
           var image = data.User.ProfilePic+"?type=large";
-         $('#new_ul').append("<li><img title="+name+" src="+image+"></li>");
+         $('#new_ul').prepend("<li><img title="+name+" src="+image+"></li>");
         });
       
       </script>

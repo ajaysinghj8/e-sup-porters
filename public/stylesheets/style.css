@@ -31,7 +31,7 @@ body {
 
 .containerImages ul li {
 	opacity: 0.5;
-	float: right;
+	float: left;
 }
 .containerImages ul li img {
 	

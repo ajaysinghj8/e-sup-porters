@@ -95,7 +95,7 @@ server.listen(app.get('port'), function(){
 //sockets
 io.sockets.on('connection', function (socket) {
   setInterval(function () {
-    models.User.findOne({},'DisplayName ProfilePic',{ sort:{Updated_at :-1 }},function (err,user) {
+    models.User.findOne({},'DisplayName ProfilePic',{ sort:{Updated_at :1 }},function (err,user) {
       models.Pm.find({},'Votes',function  (err,pms) {
         var d = {
          date : new Date(),
