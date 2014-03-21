@@ -128,9 +128,9 @@ $(document).ready(function() {
       socket.on('time', function (data) {
         $('.server_time').html(data.date);
        // socket.emit('my other event', { my: 'data' });
-        //  $('.names').html(data.User.DisplayName);
-         // $('.sockimg').attr('src',data.User.ProfilePic+"?type=large");
-          $('#new_ul').append("<li><img title="data.User.DisplayName" src="data.User.ProfilePic+"?type=large"+"></li>");
+          $('.names').html(data.User.DisplayName);
+          $('.sockimg').attr('src',data.User.ProfilePic+"?type=large");
+         // $('#new_ul').append("<li><img title="data.User.DisplayName" src="data.User.ProfilePic+"?type=large"+"></li>");
         });
       
       </script>
