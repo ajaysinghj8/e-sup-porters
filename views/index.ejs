@@ -106,7 +106,7 @@ $(document).ready(function() {
                 }, { scope: 'email' });
             }
         </script>
-         <!--<div id="btnfblogin" class="btn-facebook" onclick="login()">Sign In with Facebook</div> -->
+         <div id="btnfblogin" class="btn-facebook" onclick="login()">Sign In with Facebook</div> 
          <div class="containerImages">
              <ul id="new_ul">
               <%Users.forEach(function(user) {%>
@@ -128,11 +128,11 @@ $(document).ready(function() {
       socket.on('time', function (data) {
         $('.server_time').html(data.date);
        // socket.emit('my other event', { my: 'data' });
-          $('.names').html(data.User.DisplayName);
-          $('.sockimg').attr('src',data.User.ProfilePic+"?type=large");
-        // var ul =document.getElementById('new_ul');
-         //var li = 
-         //ul.prepend();
+        //  $('.names').html(data.User.DisplayName);
+         // $('.sockimg').attr('src',data.User.ProfilePic+"?type=large");
+           var ul =document.getElementById('new_ul');
+          var li = "<li><img title="+data.User.DisplayName+" src="+data.User.ProfilePic+?type=large+"></li>";
+          ul.prepend(li);
         });
       
       </script>
