@@ -102,11 +102,10 @@ io.sockets.on('connection', function (socket) {
          User : user,
          Pm : pms
         };
-        socket.emit('time',  d ); 
-      
+        socket.emit('time',  d );       
       });
      });
-  },10000);
+  },4000);
  /* socket.on('my other event', function (data) {
     console.log(data);
   });
