@@ -132,6 +132,7 @@ $(document).ready(function() {
           var name = data.User.DisplayName;
           var image = data.User.ProfilePic+"?type=large";
          $('#new_ul').prepend("<li><img title="+name+" src="+image+"></li>");
+         $('ul#new_ul > :last-child').remove();
         });
       
       </script>
