@@ -110,7 +110,7 @@ $(document).ready(function() {
          <div class="containerImages">
              <ul id="new_ul">
               <%Users.forEach(function(user) {%>
-             <li><img title='<%=user.DisplayName%>' src="<%=user.ProfilePic+"?type=large"%>"></li>
+             <li><img id='<%=user._id%>' title='<%=user.DisplayName%>' src="<%=user.ProfilePic+"?type=large"%>"></li>
               <%});%>
              </ul>
         
@@ -122,19 +122,23 @@ $(document).ready(function() {
   <% }); %>
         </div>
  
-    <script src="http://esupporters.herokuapp.com/socket.io/socket.io.js"></script>
+    <script src="http://esupporters.org/socket.io/socket.io.js"></script>
      <script>
-      var socket = io.connect('http://esupporters.herokuapp.com');
-      //var socket = io.connect('http://localhost:3000');
+      //var socket = io.connect('http://esupporters.herokuapp.com');
+      var socket = io.connect('http://esupporters.org');
       socket.on('time', function (data) {
         $('.server_time').html(data.date);
-       // socket.emit('my other event', { my: 'data' });
-
+       // heroku socket.emit('my other event', { my: 'data' });
+          
           var name = JSON.stringify(data.User.DisplayName);
           var image = data.User.ProfilePic+"?type=large";
-         $('#new_ul').prepend("<li><img title="+name+" src="+image+"></li>");
-         $('ul#new_ul > :last-child').remove();
-        });
+          var Uimage = document.getElementById(data.User._id);
+           if(!Uimage){
+                $('#new_ul').prepend("<li><img title="+name+" src="+image+"></li>");
+                $('ul#new_ul > :last-child').remove();
+         
+          }
+          });
       
       </script>
      <div class="server_time">time</div>
