@@ -13,6 +13,7 @@ var CommentSchema = new Schema({
  
 var PmSchema = new Schema ({
     Name : String
+   ,Party :String
    ,Line :String
    ,About :String 
    ,Objectives : String

@@ -8,9 +8,8 @@
 //config.couchdb.secondsToInvalidateEvents = 120;
 //config.couchdb.secondsToFlushVotes = 10;
 
-//config.twilio.sid = 'ACxxx';
-//config.twilio.key = 'yyy';
-//config.twilio.disableSigCheck = false;
+config.sid = 'QWERTY8288818190';
+config.key = 'ivotes';
 
 config.cookiesecret = 'asd;lfkajs;ldfkj';
 config.dbUrl_local = 'mongodb://127.0.0.1:27017/Voters_db2';

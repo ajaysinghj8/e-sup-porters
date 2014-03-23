@@ -1,55 +1,54 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Voters</title>
-   <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
-    <script type="text/javascript" 
-    src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> 
-   <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-   <script src="//code.jquery.com/jquery-1.9.1.js"></script>
-   <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-   <link rel="stylesheet" href="/resources/demos/style.css">
- 
-<script type="text/javascript">
-$(document).ready(function() {
-  $('#circle_bounce').hover(function() {
-      $( "#circle_bounce" ).toggle( "bounce", { times: 1 }, "slow" );
-  });
-});
-  $(function() {
-    $( document ).tooltip();
-  });
- 
-   function voteme(param) { 
-            var objmsg = document.getElementById("votes"+param);
-              $.post("/vote/"+param,function (data) {
-                    if (data.notice !='undefined')
-                        alert(data.msg);
-                    else if (data.notice !='undefined')
-                        alert(data.notice);
-                    else
-                         alert(data.err);
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="/stylesheets/Style.css" />
+<script src="/javascripts/jquery.js" type="text/javascript" ></script>
+<link rel="stylesheet" type="text/css" href="/stylesheets/jquery-ui.css">
+<script type="text/javascript" src="/javascripts/jquery-ui.js"></script>
+<script type="text/javascript" src="/javascripts/manager.js"></script>
+ <script type="text/javascript">
+ function loading() {
+    <% if(Usession) {%>
+           	$(".div-logout").fadeIn(500);
+            $(".div-login").fadeOut(500);
+            $('.div-logout-name').html('<%=Usession.DisplayName%>');//square,small,normal,large
+            $('.img-profile').css('background-image', 'url(<%=Usession.ProfilePic%>?type=square)');        
+        <%};%> 
+      <% var total = 0;
+        Pms.forEach(function (g) {
+      	 total +=g.Votes;
+      	  });  
+       Pms.forEach(function (g) { %>
+      	 $('#avg<%=g._id%>').html('<%=(g.Votes*100/total)%>%');
+      	  <%});  %>
+       
 
-               });
-   }
- function loginsucessfull(data){
-    alert(JSON.stringify(data))
- }
- $('.container_pms').center();
+    }  
+   </script>
+   <script> 	    
+  $(document).ready(function()
+    {   
+    	 $(".popup-cross").click(function()
+        {
+            $(".popup-container").fadeOut(500);
+        });
+        
+        $(".popup-btn-ok").click(function()
+        {
+            $(".popup-container").fadeOut(500);
+        });
+    });      
  </script>
-  </head>
-    <body>
-    <div class="main-div">
-        <div id="fb-root"></div>
-        <script type="text/javascript" src="JS/fb.js"></script>
-        <script src="http://connect.facebook.net/en_US/all.js" type="text/javascript"></script>
-
-        <script>
+<title>Election 2014</title>
+</head>
+<body onload="loading()"> 
+		<div id="fb-root"></div>
+           <script>
 
             // Init the SDK upon load
             window.fbAsyncInit = function () {
                 FB.init({
-                    appId: '564097210354318', // App ID 225481757617266 final app id  564097210354318
+                    appId: '225481757617266', // App ID 225481757617266 final app id  564097210354318
                     channelUrl: '//' + window.location.hostname + '/channel', // Path to your Channel File
                     status: true, // check login status
                     cookie: true, // enable cookies to allow the server to access the session
@@ -106,45 +105,133 @@ $(document).ready(function() {
                 }, { scope: 'email' });
             }
         </script>
-         <div id="btnfblogin" class="btn-facebook" onclick="login()">Sign In with Facebook</div> 
-         <div class="containerImages">
-             <ul id="new_ul">
-              <%Users.forEach(function(user) {%>
-             <li><img id='<%=user._id%>' title='<%=user.DisplayName%>' src="<%=user.ProfilePic+"?type=large"%>"></li>
-              <%});%>
-             </ul>
-        
-         </div>
-         <div id="circle_bounce" class="circle" title="Please Vote me."></div>
-              <div class="container_pms">
-   <% Pms.forEach(function(g) { %> 
-       <div class="list_pms" onclick="voteme('<%=g._id%>')"><%=g.Name%> <span id="votes<%=g._id%>"><%=g.Votes%></span>  </div> 
-  <% }); %>
-        </div>
- 
-    <script src="http://esupporters.org/socket.io/socket.io.js"></script>
-     <script>
-      //var socket = io.connect('http://esupporters.herokuapp.com');
-      var socket = io.connect('http://esupporters.org');
-      socket.on('time', function (data) {
-        $('.server_time').html(data.date);
-       // heroku socket.emit('my other event', { my: 'data' });
-          
-          var name = JSON.stringify(data.User.DisplayName);
-          var image = data.User.ProfilePic+"?type=large";
-          var Uimage = document.getElementById(data.User._id);
-           if(!Uimage){
-                $('#new_ul').prepend("<li><img title="+name+" src="+image+"></li>");
-                $('ul#new_ul > :last-child').remove();
-         
-          }
-          });
-      
+
+    <!-- Container Starts -->
+        <div class="container">
+		
+		<!-- Main Image Container Starts -->
+			<div class="bg-pics">
+	    
+			<!-- LOGIN - LOGOUT div Starts -->	
+				<div class="div-login">
+					<div class="btn-login" onclick='login()' >
+						LOGIN
+					</div>
+				</div>
+				
+				<div class="div-logout">
+					<div class="div-logout-img img-profile">
+					</div>
+					
+					
+					<div class="div-logout-content">
+						<div class="div-logout-row">
+							<div class="div-logout-name">
+								_______
+							</div>
+						</div>
+						<div class="div-logout-row">
+							<div class="btn-logout" onclick="logoutfbme()">
+								LOGOUT
+							</div>
+						</div>
+					</div>
+				</div>
+
+			<!-- LOGIN - LOGOUT div Ends -->
+
+			<!-- Background Images Starts -->
+				<ul id='new_ul'>
+				<% for(var i=0;i<9;i++ ) {%>
+				 <%Users.forEach(function(user) {%>
+             <li><img id='<%=user._id%>' title='<%=user.DisplayName%>' src="<%=user.ProfilePic+"?type=small"%>"></li>
+              <%});}%> 
+			 	</ul>
+			<!-- Background Images Ends -->
+			
+			<!-- Main Center Contents Starts -->
+				<div class="content-wrapper">
+				<% Pms.forEach(function(g) { %> 
+   						<div class="content-column">
+						<div id='avg<%=g._id%>' class="div-percentage">
+							__%
+						</div>
+						<div class="div-circle">
+							<div title='<%=g.Line%>' class="div-img-circle img-kejriwal" style="background-image: url('/images/<%=g.ProfilePic%>');">
+							</div>
+						</div>
+						
+						<div class="div-name">
+							<%=g.Name%>
+						</div>
+						<div class="div-party">
+							<%=g.Party%>
+						</div>
+						<div class="div-votes" id="votes<%=g._id%>">
+							<%=g.Votes%>
+						</div>
+						
+						<div class="div-btn-vote">
+							<div class="btn-vote" onclick="voteme('<%=g._id%>')" > VOTE </div>
+						</div>
+					</div>
+                <% }); %>
+				</div>
+			<!-- Main Center Contents Ends -->
+			
+			</div>
+		<!-- Main Image Container Ends -->
+		
+		</div>
+	<!-- Container Ends -->
+	
+	
+	<!-- Pop Up Container Wrapper Starts -->
+		<div class="popup-container">
+		
+		<!-- Pop Up Main Content Wrapper Starts -->
+			<div class="popup-content">
+				<div class="popup-header-row">
+					<div class="popup-header-label">-----------------</div>
+					<!-- <div class="popup-cross"><img src="img/cross.png" /></div> -->
+				</div>
+				
+			<!-- Pop-up Middle Information Starts -->
+				<div class="popup-middle-row">
+					<div class="popup-middle-info">
+						---------------------------------
+					</div>
+				</div>
+			<!-- Pop-up Middle Information Ends -->
+				<div class="popup-btn-row">
+					<div class="popup-btn-ok">
+						OK
+					</div>
+				</div>
+			</div>
+		<!-- Pop Up Main Content Wrapper Ends -->
+			
+		</div>
+	<!-- Pop Up Container Wrapper Ends -->
+	<script src="http://www.esupporters.org/socket.io/socket.io.js"></script>
+	<script>
+     var socket = io.connect('http://www.esupporters.org');
+      socket.on('serverdata', function (data) {
+         var name = JSON.stringify(data.User.DisplayName);
+         var image = data.User.ProfilePic+"?type=large";
+         var Uimage = document.getElementById(data.User._id);
+         if(!Uimage){
+               $('#new_ul').prepend("<li><img title="+name+" src="+image+"></li>");
+               $('ul#new_ul > :last-child').remove();
+               var total =0;
+               for (var i in data.Pm){ total += data.Pm[i].Votes;}
+               for (var i in data.Pm) {
+          	   var avg = data.Pm[i].Votes*100/total;
+               $('#avg'+data.Pm[i]._id).html(avg.toString()+'%');
+               }
+             }
+          else console.log('no change.');
+         });  
       </script>
-     <div class="server_time">time</div>
-     <div class="data"></div>
-     <img class="sockimg" src=""/>
-   
-   </div>  
 </body>
 </html>

@@ -1,0 +1,506 @@
+@charset "utf-8";
+/* CSS Document */
+body
+{
+	margin:0;
+	padding:0;
+	width:100%;
+	height:100%;
+    font-family:"Dev_Font";
+	background-color:#000;
+	color:#fff;
+	display:block;
+}
+
+@font-face
+{
+	font-family: Dev_Font;
+	src: src: url('/font/open.eot');
+    src: url('/font/open.eot') format('embedded-opentype'),
+         url('/font/open.woff') format('woff'),
+         url('/font/open.ttf') format('truetype'),
+         url('/font/open.svg') format('svg');
+}
+
+ul, li
+{
+	display:block;
+	list-style:none;
+	float:left;
+	margin:0;
+	padding:0;
+}
+
+
+
+/* CSS Container Starts  */
+
+.container
+{
+	width:100%;
+	min-height:650px;
+	float:left;
+	background-color:#aaa;
+	display:block;
+}
+
+/* CSS for Background Images Starts  */
+.bg-pics
+{
+	margin:0 auto;
+	width:100%;
+	height:100%;
+	float:left;
+	z-index:0;
+	position:relative;
+	overflow:hidden;
+}
+.bg-pics ul img
+{
+	width:132px;
+	height:111px;
+	border:1px solid #ccc;
+	background-size:cover;
+	float:left;
+	z-index:1;
+	opacity:0.6;
+}
+
+/* CSS for Main Content Starts  */
+
+.content-wrapper
+{
+	width:60%;
+	height:70%;
+	margin:7.5% 20.4%;
+	position:absolute;
+	z-index:2;
+	background-color:rgba(170,170,170,0.8);
+}
+
+.content-column
+{
+	width:32%;
+	height:100%;
+	margin-left:1%;
+	float:left;
+	z-index:3;
+}
+
+.div-percentage
+{
+	width:56%;
+	height:7%;
+	float:left;
+	z-index:4;
+	padding:5% 0% 2% 44%;
+	font-size: 32px;
+	font-weight:bold;
+	/* color:#6fcff4; */
+    /* font-family:Verdana, Geneva, sans-serif; */
+}
+.div-circle
+{
+	width:90%;
+	height:45%;
+	margin:0% 5%;
+	border:2px solid #fff;
+	border-radius:50%;
+	float:left;
+	z-index:4;
+}
+
+.div-img-circle
+{
+	width:95%;
+	height:95%;
+	margin:2% 2%;
+	border:2px solid #aaa;
+	border-radius:50%;
+	background-size:cover;
+	float:left;
+	z-index:5;
+	overflow:hidden;
+}
+.img-kejriwal
+{
+   /*background-image: url('/images/kejriwal.png');*/
+}
+.img-modi
+{
+	/*background-image: url('/images/modi.png');*/
+}
+
+.img-rahul
+{
+	/*background-image: url('/images/rahul.png');*/
+}
+
+.div-name
+{
+	width:98%;
+	height:5%;
+	float:left;
+	text-align:center;
+	z-index:4;
+	padding:5% 1% 5% 1%;
+	font-size: 28px;
+	font-weight:bold;
+    /* font-family:Verdana, Geneva, sans-serif; */ 
+	overflow:hidden;
+}
+
+.div-party
+{
+	width:98%;
+	height:7%;
+	float:left;
+	text-align:center;
+	z-index:4;
+	padding:2% 1% 2% 1%;
+	font-size: 28px;
+	/* font-weight:bold; */
+    /* font-family:Verdana, Geneva, sans-serif; */
+	overflow:hidden;
+}
+
+.div-votes
+{
+	width:98%;
+	height:5%;
+	float:left;
+	text-align:center;
+	z-index:4;
+	padding:2% 1% 2% 1%;
+	font-size: 28px;
+	font-weight:bold;
+    /* font-family:Verdana, Geneva, sans-serif; */
+	overflow:hidden;
+}
+
+.div-btn-vote
+{
+	width:92%;
+	height:12%;
+	margin-top:5%;
+	padding:4%;
+	float:left;
+	z-index:4;
+	text-align:center;
+}
+
+.btn-vote
+{
+	width:35%;
+	height:50%;
+	-webkit-appearance: none;
+	appearance: none;
+	background-color: #47b7e6;
+	border: none;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	color:#ccc;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 24px;
+	margin-top: 10px;
+	padding: 10px 30px 10px 30px;
+	text-decoration: none;
+	transition: background-color, color ease 0.8s;
+    -moz-transition: background-color, color ease 0.8s;
+    -webkit-transition: background-color, color ease 0.8s;
+	font-family: "Dev_Font";
+	z-index:5;
+}
+.btn-vote:active 
+{
+	opacity: 0.3;
+	color:#fff;
+	outline: none;
+	margin-top:12px;
+	position:relative;
+}
+.btn-vote:hover, .btn-vote:focus 
+{
+	background-color: #0089fa;
+	color:#fff;
+	outline: none;	
+}
+
+
+
+
+/* LOGIN CSS Starts */
+
+.div-login
+{
+	width:20%;
+	height:20%;
+	z-index:6;
+	position:fixed;
+	margin-left:81%;
+	margin-top:3%;
+	float:right;
+}
+
+.btn-login
+{
+	width:20%;
+	height:23%;
+	-webkit-appearance: none;
+	appearance: none;
+	background-color:rgba(226,76,86,0.75);
+	border: none;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	color:#ccc;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 22px;
+	margin-top: 18%;
+	padding:10px 20px 8px 20px; 
+	text-decoration: none;
+	transition: background-color, color ease 0.8s;
+    -moz-transition: background-color, color ease 0.8s;
+    -webkit-transition: background-color, color ease 0.8s;
+	font-family: "Dev_Font";
+	margin-right:2%;
+	float:right;
+	z-index:6;
+}
+
+.btn-login:active 
+{
+	background-color: #e0212c;
+	opacity: 0.3;
+	outline: none;
+	color:#fff;
+	margin-top:19%;
+	position:relative;
+}
+.btn-login:hover, .btn-login:focus 
+{
+	background-color:#cb363f;
+	color:#fff;
+	outline: none;
+}
+
+
+/* LOGOUT CSS Starts */
+
+.div-logout
+{
+	width:20%;
+	height:20%;
+	z-index:6;
+	position:fixed;
+	margin-left:81%;
+	margin-top:3%;
+	display:none;
+}
+.div-logout-img
+{
+	width:50%;
+	height:100%;
+	background-color:rgba(170,170,170,0.96);
+	float:left;
+	border-radius:50%;
+	background-size:cover;
+	z-index:8;
+}
+.img-profile
+{
+	background-image: url('/images/profile.jpg');
+}
+.div-logout-content
+{
+	width:65%;
+	height:80%;
+	background-color:rgba(170,170,170,0.7);
+	margin:5% 0% 5% 35%;
+	z-index:7;
+}
+
+.div-logout-row
+{
+	width:74%;
+	height:50%;
+	float:left;
+	text-align:center;
+}
+.div-logout-name
+{
+	width:97%;
+	height:48%;
+	float:left;
+	text-align:center;
+	padding-top:6%;
+	margin-top:8%;
+	overflow:hidden;
+	z-index:8;
+	font-family:"Dev_Font";
+}
+.btn-logout
+{
+	width:50%;
+	height:54%;
+	-webkit-appearance: none;
+	appearance: none;
+	background-color:rgba(226,76,86,0.75);
+	border: none;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	color: #ccc;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 22px;
+	margin-top: 3px;
+	padding:6px 10px 8px 10px; 
+	text-decoration: none;
+	transition: background-color, color ease 0.8s;
+    -moz-transition: background-color, color ease 0.8s;
+    -webkit-transition: background-color, color ease 0.8s;
+	font-family: "Dev_Font";
+	z-index:8;
+}
+
+.btn-logout:active 
+{
+	background-color: #e0212c;
+	color:#fff;
+	opacity: .3;
+	outline: none;
+	margin-top:4px;
+	position:relative;
+}
+.btn-logout:hover, .btn-logout:focus 
+{
+	background-color:#cb363f;
+	color:#fff;
+	outline: none;
+}
+
+
+/* Pop Up Information CSS Starts */
+
+.popup-container
+{
+	margin:0;
+	position: fixed;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	left: 0px;
+	background-color: rgba(0, 0, 0,0.8);
+	display:none;
+}
+
+.popup-content
+{
+	width:500px;
+	height:400px;
+	margin:auto;
+	background-color:rgba(170, 170, 170,0.7);
+	margin:auto;
+	margin-top:8%;
+}
+
+/* Popup Header */
+
+.popup-header-row
+{
+	width:100%;
+	height:50px;
+	border-bottom:1px solid #ccc;
+	float:left;
+}
+.popup-header-label
+{
+	width:400px;
+	height:30px;
+	margin-top:10px;
+	margin-left:10px;
+	font-size:26px;
+	color:#fff;
+	float:left;
+}
+.popup-cross
+{
+	width:50px;
+	height:30px;
+	margin-top:10px;
+	margin-right:10px;
+	text-align:right;
+	float:right;
+	cursor:pointer;
+}
+
+.popup-middle-row
+{
+	width:100%;
+	height:280px;
+	border-bottom:1px solid #ccc;
+	float:left;
+}
+.popup-middle-info
+{
+	width:420px;
+	height:220px;
+	margin:10px 20px;
+	float:left;
+	overflow:hidden;
+	text-align:justify;
+	font-size:20px;
+	padding:30px 20px 10px 20px;
+	color:#fff;
+	
+}
+.popup-btn-row
+{
+	width:500px;
+	height:70px;
+	float:left;
+	text-align:center;
+}
+.popup-btn-ok
+{
+	
+	width:50px;
+	height:34px;;
+	-webkit-appearance: none;
+	appearance: none;
+	background-color: #47b7e6;
+	border: none;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	color:#ccc;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 28px;
+	padding: 10px 30px 10px 30px;
+	margin-top:8px;
+	text-decoration: none;
+	transition: background-color, color ease 0.8s;
+    -moz-transition: background-color, color ease 0.8s;
+    -webkit-transition: background-color, color ease 0.8s;
+	font-family: "Dev_Font";
+	z-index:5;
+}
+.popup-btn-ok:active 
+{
+	opacity: 0.3;
+	color:#fff;
+	outline: none;
+	margin-top:9px;
+	position:relative;
+}
+.popup-btn-ok:hover, .popup-btn-ok:focus 
+{
+	background-color: #0089fa;
+	color:#fff;
+	outline: none;	
+}

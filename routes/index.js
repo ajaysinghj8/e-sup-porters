@@ -8,7 +8,7 @@ exports.Home = function(req, res){
   	   req.db.User.find({},function   ( err,users) {
          if(err) res.json(200,{msg:"no pm found"});
          else
-                res.render('index',{Pms:pms,Users:users});      
+                res.render('index',{Pms:pms,Users:users,Usession:req.session.User});      
        });
   	
   	}

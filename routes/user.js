@@ -1,6 +1,6 @@
  
 exports.list = function(req, res){
-  req.db.User.find({},null,{ sort: { created_at : -1 }},
+  req.db.User.find({},null,{ sort: { Updated_at : -1 }},
                               function   ( err,docs) {
                             if (err)
                                 res.json(200,{msg :"no user found"});
@@ -14,7 +14,7 @@ exports.checkUser = function(req, res, next) {
     console.info('Access USER: ' + req.session.User.DisplayName+ "  " +req.session.User._id);
     return next();
   } else {
-    res.json( {msg: 'Please Login first. Login Button is reside in upper right corner'} );
+    res.json(200, {notice: 'Please Login first. Login Button is reside in upper right corner'} );
   }
 };
 exports.register2 = function (req,res) {
@@ -85,11 +85,8 @@ exports.register = function(req,res) {
 exports.logout = function(req, res) {
   console.info('Logout USER: ' + req.session.UserId);
   req.session.destroy(function(error) {
-    if (!error) {
-      res.send({
-        msg: 'Logged out'
-      });
-    }
+    if (error) {res.json(200, { err: 'Something wierd had happened.!' });}
+    else res.json(200, { msg: 'logout successfully.' });
   });
 };
  

@@ -25,7 +25,7 @@ exports.countVotes = function  (req,res,next) {
                                   ,function (err,doc) {
     // body...
                 if(err) {console.log(err);res.json({err:"Sorry! But Something weird had happened."});} 
-               else res.json({notice:"Thanks for your valueable time."}); 
+               else res.json({msg:"Thanks for your valueable time."}); 
       });
 
   });

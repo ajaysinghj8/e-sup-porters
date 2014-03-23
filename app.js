@@ -1,8 +1,3 @@
-
-/**
- * Module dependencies.
- */
-
 var express = require('express');
 var http = require('http');
 var path = require('path');
@@ -14,11 +9,9 @@ var routes = require('./routes');
 var user = require('./routes/user');
 var config = require('./config');
 var app = express();
-
-//local variables through website
 app.locals({
 	//local varibles for through out website
-	 title: 'Voters'
+	 title: 'E-Supporters'
 });
 // all environments
 app.configure( function() {
@@ -30,19 +23,19 @@ app.configure( function() {
 		app.use(express.logger('dev'));
 		app.use(express.json());
 		app.use(express.urlencoded());
-	    app.use(express.bodyParser());
+	  app.use(express.bodyParser());
 		app.use(express.methodOverride());
 		app.use(express.cookieParser(config.cookiesecret));
 		app.use(express.session({
-            secret: 'QWERTY8288818190',
-            key: 'ivotes',
+            secret: config.sid,
+            key: config.key,
             cookie: {
                 secret: true,
-                 expires: false      
+                 expires: new Date(Date.now() + 60 * 60000), 
+                 maxAge: 60*60000    //60 mints
             }
        }));
 		app.use(app.router);
-		app.use(express.static(path.join(__dirname, 'public')));
 
 });
 
@@ -52,6 +45,7 @@ mongoose.connect(config.dbUrl_heroku, function  (err) {
   else
   	 console.log('DataBase Connected.');
 });
+
 var models = require('./models');
 function db (req, res, next) {
   req.db = {
@@ -65,13 +59,14 @@ function db (req, res, next) {
 
 //routes
 app.get('/',db,routes.Home);
-//app.get('/comment/:id',routes);
-//app.post('/comment/:id',routes.pm.commnet);
 app.post('/register',db,routes.user.register2);
 app.post('/logout',routes.user.logout);
 app.post('/vote/:id',db,routes.user.checkUser,routes.pm.VoteUp,routes.pm.countVotes);
+app.get('*',routes.Page404);
 
 
+//app.get('/comment/:id',routes);
+//app.post('/comment/:id',routes.pm.commnet);
 
 //api
 //app.get('/api/getvotes');
@@ -81,7 +76,6 @@ app.post('/vote/:id',db,routes.user.checkUser,routes.pm.VoteUp,routes.pm.countVo
 //app.get('/admin/pm/new',db,routes.pm.New);
 //app.post('/admin/pm/add',db,routes.pm.Add);
 
-app.get('*',routes.Page404);
  
 
 
@@ -102,10 +96,10 @@ io.sockets.on('connection', function (socket) {
          User : user,
          Pm : pms
         };
-        socket.emit('time',  d );       
+        socket.emit('serverdata',  d );       
       });
      });
-  },4000);
+  },5000);
  /* socket.on('my other event', function (data) {
     console.log(data);
   });
