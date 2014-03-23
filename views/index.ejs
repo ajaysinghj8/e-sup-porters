@@ -19,7 +19,7 @@
       	 total +=g.Votes;
       	  });  
        Pms.forEach(function (g) { %>
-      	 $('#avg<%=g._id%>').html((<%=(g.Votes*100/total)%>).toFixed(2).toString()+"%"');
+      	 $('#avg<%=g._id%>').html((<%=(g.Votes*100/total)%>).toFixed(2).toString()+"%");
       	  <%});  %>
        
 
