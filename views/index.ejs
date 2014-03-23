@@ -234,6 +234,7 @@
                for (var i in data.Pm){ total += data.Pm[i].Votes;}
                for (var i in data.Pm) {
                var avg = data.Pm[i].Votes*100/total;
+               $('#votes'+data.Pm[i]._id).html(data.Pm[i].Votes.toString());
                $('#avg'+data.Pm[i]._id).html(avg.toFixed(2).toString()+'%');
                }
        
