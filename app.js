@@ -102,7 +102,7 @@ io.sockets.on('connection', function (socket) {
          User : user,
          Pm : pms
         };
-        io.socket.brodcast.emit('time',  d );       
+        io.socket.emit('time',  d );       
       });
      });
   },4000);
