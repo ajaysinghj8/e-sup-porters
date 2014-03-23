@@ -87,13 +87,13 @@ app.get('*',routes.Page404);
 
 //server
 var server = http.createServer(app);
-var sockets = io.socketio.listen(server);
+var io = socketio.listen(server);
 server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
 
 //sockets
-sockets.on('connection', function (socket) {
+io.sockets.on('connection', function (socket) {
   setInterval(function () {
     models.User.findOne({},'DisplayName ProfilePic',{ sort:{Updated_at :1 }},function (err,user) {
       models.Pm.find({},'Votes',function  (err,pms) {
