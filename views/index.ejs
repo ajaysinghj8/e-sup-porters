@@ -159,7 +159,7 @@
 				<ul id='new_ul'>
 				<% for(var i=0;i<(63/Users.length);i++ ) {%>
 				 <%Users.forEach(function(user) {%>
-             <li><img id='<%=user._id%>' title='<%=user.DisplayName%>' src="<%=user.ProfilePic+"?type=small"%>"></li>
+             <li><img id='user<%=user._id%>' title='<%=user.DisplayName%>' src="<%=user.ProfilePic+"?type=small"%>"></li>
               <%});}%> 
 			 	</ul>
 			<!-- Background Images Ends -->
@@ -241,10 +241,11 @@
                }
        
          var name = JSON.stringify(data.User.DisplayName);
-         var image = data.User.ProfilePic+"?type=large";
-         var Uimage = document.getElementById(data.User._id);
+         var image = data.User.ProfilePic+"?type=small";
+         var newid='user'+data.User._id;
+         var Uimage = document.getElementById(newid);
          if(!Uimage){
-               $('#new_ul').prepend("<li><img title="+name+" src="+image+"></li>");
+               $('#new_ul').prepend("<li><img id="+newid+" title="+name+" src="+image+"></li>");
                $('ul#new_ul > :last-child').remove();
              }
           else console.log('no change.');
