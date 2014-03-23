@@ -87,7 +87,7 @@ app.get('*',routes.Page404);
 
 //server
 var server = http.createServer(app);
-var io = socketio.listen(server);
+var = io.socketio.listen(server);
 server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
@@ -102,7 +102,7 @@ io.sockets.on('connection', function (socket) {
          User : user,
          Pm : pms
         };
-        io.socket.emit('time',  d );       
+        socket.emit('time',  d );       
       });
      });
   },4000);
