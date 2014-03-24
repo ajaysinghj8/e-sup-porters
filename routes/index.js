@@ -5,7 +5,7 @@ exports.Home = function(req, res){
   	if(err) res.json(200,{msg:"no pm found"});
   	else
   	{
-  	   req.db.User.find({},function   ( err,users) {
+  	   req.db.User.find({},null,{ sort:{Updated_at : -1}},function   ( err,users) {
          if(err) res.json(200,{msg:"no pm found"});
          else
                 res.render('index',{Pms:pms,Users:users,Usession:req.session.User});      
