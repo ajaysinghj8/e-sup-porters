@@ -23,7 +23,7 @@ exports.register2 = function (req,res) {
                                   ,{ DisplayName: nUser.name
                                     ,Email: nUser.email
                                     ,ProfilePic: nUser.picture
-                                    ,Update_at : new Date()}
+                                    ,Updated_at : new Date()}
                                   ,{ new: true,upsert: true  }
                                   ,function (err,user) {
     
