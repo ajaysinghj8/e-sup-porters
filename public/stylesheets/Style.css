@@ -57,7 +57,7 @@ ul, li
 }
 .bg-pics ul img
 {
-	width:132px;
+	width:143px;
 	height:111px;
 	border:1px solid #ccc;
 	background-size:cover;
@@ -71,7 +71,7 @@ ul, li
 .content-wrapper
 {
 	width:60%;
-	height:40%;
+	height:37%;
 	margin:7.5% 20.4%;
 	position:absolute;
 	z-index:2;
