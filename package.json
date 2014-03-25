@@ -1,9 +1,9 @@
 {
   "name": "Indian_Voters",
-  "version": "0.8.2",
+  "version": "0.9.1",
   "private": true,
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "node app.js"
   },
   "dependencies": {
     "express": "3.4.8",
