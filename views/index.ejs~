@@ -3,6 +3,8 @@
             xmlns:fb="http://ogp.me/ns/fb#">
 <head>
 
+
+<meta name="description" content="RealTime web application with node.js and Mongodb. Developed by https://about.me/meajaysingh."/>
 <meta name="keywords" content="Votes, Elections 2014, Elections, Pm , Lok sabha, Rajya Sabha, President ,Voters,Vote,MLA,CM, Prime Ministers,Prime, narendra modi,modi, kejriwal, Arvind Kejriwal,Rahul Gandhi" />
 <meta property="og:title" content="Vote Your PM Candidate Today.. »" />
 <meta property="og:type" content="website" />
