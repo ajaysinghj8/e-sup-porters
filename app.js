@@ -99,7 +99,7 @@ io.sockets.on('connection', function (socket) {
         socket.emit('serverdata',  d );       
       });
      });
-  },8000);
+  },4000);
  socket.on('disconnect', function () {
     console.log('@@@@@@@-------------Disconnecting from sockets');
     clearInterval(intervalid);
