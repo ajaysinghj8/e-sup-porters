@@ -48,7 +48,7 @@ exports.logout = function(req, res) {
   console.info('Logout USER: ' + req.session.UserId);
   req.session.destroy(function(error) {
     if (error) {res.json(200, { err: "Something wierd had happened.!" });}
-    else res.json(200, { msg: "Logged out Successfully.<p>Want your picture on the top just login again when you see that your picture is not there in the background.</p>" });
+    else res.json(200, { msg: "Logged out Successfully.</p>" });
   });
 };
  
