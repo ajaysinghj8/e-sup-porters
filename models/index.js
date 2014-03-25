@@ -35,6 +35,7 @@ var UserSchema = new Schema({
   ,  My_Pm  :{type: Schema.Types.ObjectId, ref: 'Pm'}
   ,  Updated_at  : { type : Date, default : Date.now }
   ,  Created_at: { type: Date,  default: Date.now }
+  ,  Visits: { type : Number, default: 0}
 });
 
 exports.User = mongoose.model('User',UserSchema);

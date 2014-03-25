@@ -17,7 +17,8 @@ exports.checkUser = function(req, res, next) {
     res.json(200, {notice: 'Please Login first. Login Button is reside in upper right corner'} );
   }
 };
-exports.register2 = function (req,res) {
+
+exports.register = function (req,res) {
   var nUser = req.body;
   req.db.User.findOneAndUpdate({Email :nUser.email}
                                   ,{ DisplayName: nUser.name
@@ -25,7 +26,7 @@ exports.register2 = function (req,res) {
                                     ,ProfilePic: nUser.picture
                                     ,Updated_at : new Date()
                                     ,$inc:{ Visits :1}
-                                     }
+                                    }
                                   ,{ new: true,upsert: true  }
                                   ,function (err,user) {
     
@@ -34,7 +35,7 @@ exports.register2 = function (req,res) {
                         {        req.session.auth = true;
                                  req.session.UserId = user._id.toHexString();
                                  req.session.User = user;
-                                     console.info('Login USER: ' + req.session.UserId +"-"+ req.session.User.DisplayName);
+                                     console.info('Login USER: ' + req.session.User.DisplayName);
                                      res.json(200, { msg: user });    
                                
                         } 
@@ -42,53 +43,12 @@ exports.register2 = function (req,res) {
       });
 
 };
-exports.register = function(req,res) {
-   var nUser = req.body;
-  // Modifiy to do find or update
-   req.db.User.findOne({Email: nUser.email},function  (err,user) {
-      //if(err) res.json(200, { msg: 'not_Authorized' });
-     console.log('new user creating');
-     if(user)
-        {     console.log('user found Updating');
-     
-                 req.session.auth = true;
-                 req.session.UserId = user._id.toHexString();
-                 req.session.User = user;
-                     console.info('Login USER: ' + req.session.UserId +"-"+ req.session.User.DisplayName);
-                     res.json(200, { msg: user });    
-               
-        }
-      else 
-       {  
-           console.log('saving new record');     
-        new req.db.User({
-                    DisplayName: nUser.name
-                   ,Email: nUser.email
-                   ,ProfilePic: nUser.picture
-                   }).save(function  (err,user) {
-                     if(err) res.json(200, { msg: 'not_Authorized' });
-                     if(user)
-                     {
-                        req.session.auth = true;
-                        req.session.UserId = user._id.toHexString();
-                        req.session.User = user;
-                          console.info('Login USER: ' + req.session.UserId +"-"+ req.session.User.DisplayName);
-                          res.json(200, { msg: user });    
-               
-                     }else res.json(200, { msg: 'not_Authorized' }); 
-                   });
-       }  
-     
-
-   });
  
- };
-
 exports.logout = function(req, res) {
   console.info('Logout USER: ' + req.session.UserId);
   req.session.destroy(function(error) {
-    if (error) {res.json(200, { err: 'Something wierd had happened.!' });}
-    else res.json(200, { msg: 'logout successfully.' });
+    if (error) {res.json(200, { err: "Something wierd had happened.!" });}
+    else res.json(200, { msg: "Logged out Successfully.<p>Want your picture on the top just login again when you see that your picture is not there in the background.</p>" });
   });
 };
  

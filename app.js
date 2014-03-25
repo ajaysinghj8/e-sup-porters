@@ -59,7 +59,7 @@ function db (req, res, next) {
 
 //routes
 app.get('/',db,routes.Home);
-app.post('/register',db,routes.user.register2);
+app.post('/register',db,routes.user.register);
 app.post('/logout',routes.user.logout);
 app.post('/vote/:id',db,routes.user.checkUser,routes.pm.VoteUp,routes.pm.countVotes);
 app.get('*',routes.Page404);
@@ -88,7 +88,7 @@ server.listen(app.get('port'), function(){
 
 //sockets
 io.sockets.on('connection', function (socket) {
-  setInterval(function () {
+ var intervalid = setInterval(function () {
     models.User.findOne({},'DisplayName ProfilePic',{ sort:{Updated_at :-1 }},function (err,user) {
       models.Pm.find({},'Votes',function  (err,pms) {
         var d = {
@@ -99,9 +99,10 @@ io.sockets.on('connection', function (socket) {
         socket.emit('serverdata',  d );       
       });
      });
-  },5000);
- /* socket.on('my other event', function (data) {
-    console.log(data);
+  },8000);
+ socket.on('disconnect', function () {
+    console.log('@@@@@@@-------------Disconnecting from sockets');
+    clearInterval(intervalid);
   });
- */
+ 
 });
