@@ -7,9 +7,10 @@ body
 	width:100%;
 	height:100%;
     font-family:"Dev_Font";
-	background-color:#000;
+	background-color:#ccc;
 	color:#fff;
 	display:block;
+	overflow:hidden;
 }
 
 @font-face
@@ -31,7 +32,7 @@ ul, li
 	padding:0;
 }
 
- 
+
 
 /* CSS Container Starts  */
 
@@ -45,6 +46,17 @@ ul, li
 }
 
 /* CSS for Background Images Starts  */
+.bg-container
+{
+	margin:0;
+	position: fixed;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	left: 0px;
+	background-color: rgba(0, 0, 0,0.8);
+	z-index:0;
+}
 .bg-pics
 {
 	margin:0 auto;
@@ -57,25 +69,46 @@ ul, li
 }
 .bg-pics ul img
 {
-	width:132px;
-	height:111px;
-	border:1px solid #ccc;
+	width:134.5px;
+	height:127px;
+	border:1px solid #fff;
 	background-size:cover;
 	float:left;
 	z-index:1;
-	opacity:0.6;
+	opacity:0.91;
 }
 
 /* CSS for Main Content Starts  */
 
+.content-container
+{
+	margin:0;
+	position: fixed;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	left: 0px;
+	background-color: rgba(0, 0, 0,0.3);
+	z-index:0;
+}
+.content-inner
+{
+	margin:0 auto;
+	width:100%;
+	height:100%;
+	float:left;
+	z-index:0;
+	position:relative;
+	overflow:hidden;
+}
 .content-wrapper
 {
 	width:60%;
-	height:70%;
-	margin:7.5% 20.4%;
+	height:85%;
+	margin:5.5% 20%;
 	position:absolute;
 	z-index:2;
-	background-color:rgba(170,170,170,0.8);
+	background-color:rgba(170,170,170,0.4);
 }
 
 .content-column
@@ -124,16 +157,16 @@ ul, li
 }
 .img-kejriwal
 {
-   /*background-image: url('/images/kejriwal.png');*/
+	/*background-image: url('/img/kejriwal.png');*/
 }
 .img-modi
 {
-	/*background-image: url('/images/modi.png');*/
+	/*background-image: url(' /img/modi.png');*/
 }
 
 .img-rahul
 {
-	/*background-image: url('/images/rahul.png');*/
+	/*background-image: url(' /img/rahul.png');*/
 }
 
 .div-name
@@ -312,7 +345,7 @@ ul, li
 }
 .img-profile
 {
-	/*background-image: url('/images/profile.jpg');*/
+	/*background-image: url(' /img/profile.jpg');*/
 }
 .div-logout-content
 {
