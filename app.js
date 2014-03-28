@@ -11,7 +11,7 @@ var config = require('./config');
 var app = express();
 app.locals({
 	//local varibles for through out website
-	 title: 'E-Supporters'
+	 title: 'ESupporters'
 });
 // all environments
 app.configure( function() {
@@ -55,13 +55,17 @@ function db (req, res, next) {
    };
   return next();
 }
+var boolUser = false;
+function upBooluser (req,res,next) {
+  boolUser = true;
 
-
+return next();
+};
 //routes
 app.get('/',db,routes.Home);
 app.post('/register',db,routes.user.register);
 app.post('/logout',routes.user.logout);
-app.post('/vote/:id',db,routes.user.checkUser,routes.pm.VoteUp,routes.pm.countVotes);
+app.post('/vote/:id',upBooluser,db,routes.user.checkUser,routes.pm.VoteUp,routes.pm.countVotes);
 app.get('*',routes.Page404);
 
 
@@ -86,8 +90,56 @@ server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
 
-//sockets
+
+
+/******Sockets **************/
+var models = require('./models');
 io.sockets.on('connection', function (socket) {
+ var intervalid = setInterval(function () {
+    console.log(boolUser);
+
+  if(boolUser){
+        models.User.findOne({},'DisplayName ProfilePic',{ sort:{Updated_at :-1 }},function (err,user) {
+                    models.Pm.find({},'Votes',function  (err,pms) {
+                      var d = {
+                       date : new Date(),
+                       User : user,
+                       Pm : pms
+                      };
+                      boolUser= false;
+                      socket.emit('serverdata',  d );       
+                    });
+        });
+
+ }
+ else {
+          models.User.count(function (err,count) {
+           var rand = Math.floor(Math.random() * count);
+           console.log(rand+" "+count);
+                   models.User.findOne({},'DisplayName ProfilePic',{ sort:{Updated_at :-1 }, skip: rand},function (err,user) {
+                      models.Pm.find({},'Votes',function  (err,pms) {
+                        var d = {
+                         date : new Date(),
+                         User : user,
+                         Pm : pms
+                        };
+                        socket.emit('serverdata',  d );       
+                      });
+                     });
+           });
+                 
+ }
+
+ },12000);
+    socket.on('disconnect', function () {
+    console.log('@@@@@@@-------------Disconnecting from sockets');
+    clearInterval(intervalid);
+  });
+ 
+});
+
+//sockets
+/*io.sockets.on('connection', function (socket) {
  var intervalid = setInterval(function () {
     models.User.findOne({},'DisplayName ProfilePic',{ sort:{Updated_at :-1 }},function (err,user) {
       models.Pm.find({},'Votes',function  (err,pms) {
@@ -106,3 +158,4 @@ io.sockets.on('connection', function (socket) {
   });
  
 });
+*/
