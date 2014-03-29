@@ -130,7 +130,7 @@ io.sockets.on('connection', function (socket) {
                  
  }
 
- },17000);
+ },8000);
     socket.on('disconnect', function () {
     console.log('@@@@@@@-------------Disconnecting from sockets');
     clearInterval(intervalid);
